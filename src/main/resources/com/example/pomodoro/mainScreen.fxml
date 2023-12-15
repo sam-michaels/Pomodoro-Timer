@@ -27,17 +27,17 @@
          <font>
             <Font name="Arial Bold" size="50.0" />
          </font></Label>
-      <Button layoutX="33.0" layoutY="87.0" mnemonicParsing="false" text="Pomodoro">
+      <Button layoutX="33.0" layoutY="87.0" mnemonicParsing="false" onAction="#setPomoTimer" text="Pomodoro">
          <font>
             <Font name="Arial Bold" size="25.0" />
          </font>
       </Button>
-      <Button layoutX="212.0" layoutY="87.0" mnemonicParsing="false" text="Short Break">
+      <Button layoutX="212.0" layoutY="87.0" mnemonicParsing="false" onAction="#setSmBreakTimer" text="Short Break">
          <font>
             <Font name="Arial Bold" size="25.0" />
          </font>
       </Button>
-      <Button layoutX="408.0" layoutY="87.0" mnemonicParsing="false" text="Long Break">
+      <Button layoutX="408.0" layoutY="87.0" mnemonicParsing="false" onAction="#setLgBreakTimer" text="Long Break">
          <font>
             <Font name="Arial Bold" size="25.0" />
          </font>

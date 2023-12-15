@@ -12,12 +12,13 @@ public class SettingsScreenController {
     public int getPomoMinutes() {
         return pomoMinutes;
     }
+
     public void setPomoMinutes(int minutes) {
         this.pomoMinutes = minutes * 60;
     }
 
     public int getSmBreakMin() {
-        return smBreakMin * 60;
+        return smBreakMin;
     }
 
     public void setSmBreakMin(int smBreakMin) {
@@ -25,7 +26,7 @@ public class SettingsScreenController {
     }
 
     public int getLgBreakMin() {
-        return lgBreakMin * 60;
+        return lgBreakMin;
     }
 
     public void setLgBreakMin(int lgBreakMin) {

@@ -23,6 +23,8 @@ public class MainScreenController implements Initializable {
     private SettingsScreenController time;
     private boolean timerOn = false;
     private Timeline timeline;
+    private boolean shortBreakOn, longBreakOn = false;
+    private boolean pomoOn = true;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -31,10 +33,15 @@ public class MainScreenController implements Initializable {
     }
     private void initializeTimer() {
         timer.setText(String.format("%02d:%02d", time.getPomoMinutes() / 60, time.getPomoMinutes() % 60));
+        shortBreakOn = longBreakOn = false;
+        pomoOn = true;
     }
     public void startTimer() {
+        int startTimeInSecs = 0;
+        if (pomoOn) {startTimeInSecs = time.getPomoMinutes();}
+        else if (shortBreakOn) {startTimeInSecs = time.getSmBreakMin();}
+        else if (longBreakOn) {startTimeInSecs = time.getLgBreakMin();}
 
-        int startTimeInSecs = time.getPomoMinutes();
         final int[] timeArr = {startTimeInSecs};
         if (!timerOn) {
             if (timeline == null) {
@@ -62,15 +69,42 @@ public class MainScreenController implements Initializable {
     }
 
     public void restartTimer() {
+        resetTimers();
+        if (pomoOn) {timer.setText(String.format("%02d:%02d", time.getPomoMinutes() / 60, time.getPomoMinutes() % 60));}
+        else if (shortBreakOn) {timer.setText(String.format("%02d:%02d", time.getSmBreakMin() / 60, time.getSmBreakMin() % 60));}
+        else if (longBreakOn) {timer.setText(String.format("%02d:%02d", time.getLgBreakMin() / 60, time.getLgBreakMin() % 60));}
+    }
+
+    public void openSettings() {
+    }
+
+    public void setPomoTimer() {
+        if (pomoOn) {return;}
+        initializeTimer();
+        resetTimers();
+    }
+
+    public void setSmBreakTimer() {
+        if (shortBreakOn) {return;}
+        timer.setText(String.format("%02d:%02d", time.getSmBreakMin() / 60, time.getSmBreakMin() % 60));
+        pomoOn = longBreakOn = false;
+        shortBreakOn = true;
+        resetTimers();
+    }
+
+    public void setLgBreakTimer() {
+        if (longBreakOn) {return;}
+        timer.setText(String.format("%02d:%02d", time.getLgBreakMin() / 60, time.getLgBreakMin() % 60));
+        pomoOn = shortBreakOn = false;
+        longBreakOn = true;
+        resetTimers();
+    }
+    private void resetTimers() {
         if (timeline != null) {
             timeline.stop();
         }
         timerOn = false;
         startTimer.setText("Start");
-        timer.setText(String.format("%02d:%02d", time.getPomoMinutes() / 60, time.getPomoMinutes() % 60));
         timeline = null;
-    }
-
-    public void openSettings() {
     }
 }
