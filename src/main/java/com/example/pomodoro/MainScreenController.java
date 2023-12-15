@@ -2,7 +2,6 @@ package com.example.pomodoro;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -45,7 +44,6 @@ public class MainScreenController implements Initializable {
         final int[] timeArr = {startTimeInSecs};
         if (!timerOn) {
             if (timeline == null) {
-                startTimer.setText("Pause");
                 timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                     timeArr[0] --;
                     int min = timeArr[0] / 60;
@@ -57,6 +55,7 @@ public class MainScreenController implements Initializable {
                     }
                 }));
             }
+            startTimer.setText("Pause");
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.play();
             timerOn = true;
